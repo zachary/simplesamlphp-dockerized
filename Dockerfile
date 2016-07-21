@@ -9,8 +9,8 @@ RUN rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.
     && yum -y install httpd mod_ssl php55w php55w-mcrypt php55w-pdo php55w-pear php55w-xml wget \
     && yum -y clean all
 
-RUN ssp_version=1.14.5; \
-    ssp_hash=f1d28cccd1fd23b2e796bbc8af04ac7048ac010ac69805c1939442686528a5a4; \   
+RUN ssp_version=1.14.6; \
+    ssp_hash=447c6e812575f38d8d0a5a088bc73269975ea3994828794b3b498711ab7f893f; \   
     wget https://github.com/simplesamlphp/simplesamlphp/releases/download/v$ssp_version/simplesamlphp-$ssp_version.tar.gz \
     && echo "$ssp_hash  simplesamlphp-$ssp_version.tar.gz" | sha256sum -c - \
 	&& cd /var \
