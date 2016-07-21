@@ -2,13 +2,15 @@ FROM centos:centos7
 
 MAINTAINER Unicon, Inc.
 
-RUN yum -y install epel-release \
+RUN rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
+    && rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm \
+    && yum -y install epel-release \
     && yum -y update \
-    && yum -y install httpd mod_ssl php php-mcrypt php-pear php-xml php-pdo wget \
+    && yum -y install httpd mod_ssl php55w php55w-mcrypt php55w-pdo php55w-pear php55w-xml wget \
     && yum -y clean all
 
-RUN ssp_version=1.14.3; \
-    ssp_hash=99e030d744ca4d8cd5033ef0da51d9f825ae05302045664fd49a2bae4e057a21; \   
+RUN ssp_version=1.14.4; \
+    ssp_hash=cf0fe8534c93be8073e70fa84556971711543293d4be65edb890335861d2e6b9; \   
     wget https://simplesamlphp.org/res/downloads/simplesamlphp-$ssp_version.tar.gz \
     && echo "$ssp_hash  simplesamlphp-$ssp_version.tar.gz" | sha256sum -c - \
 	&& cd /var \
