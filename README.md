@@ -19,6 +19,8 @@ This Docker image contains a deployed SimpleSAMLphp IdP/SP based on PHP 5.5 runn
 
 SimpleSAMLphp is verified using cryptographic hashes obtained from the vendor and stored in the Dockerfile directly.
 
+A working example of how this image can be used can be found at https://github.com/UniconLabs/dockerized-idp-testbed.
+
 ## Tags
 It is recommended that only the highest version tag is used as each previous tag/version is generally associated to fixes of the SimpleSAMLphp application.
 
