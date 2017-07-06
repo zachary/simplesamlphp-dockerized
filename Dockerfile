@@ -6,11 +6,11 @@ RUN rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.
     && rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm \
     && yum -y install epel-release \
     && yum -y update \
-    && yum -y install httpd mod_ssl php55w php55w-mcrypt php55w-pdo php55w-pear php55w-xml wget \
+    && yum -y install httpd mod_ssl php55w php55w-mbstring php55w-mcrypt php55w-pdo php55w-pear php55w-xml wget \
     && yum -y clean all
 
-RUN ssp_version=1.14.13; \
-    ssp_hash=6e97a9701cf916ab0b49b4622c64208acdd813af6378b9d78193b65607311680; \
+RUN ssp_version=1.14.14; \
+    ssp_hash=2ff76d8b379141cdd3340dbd8e8bab1605e7a862d4a31657cc37265817463f48; \
     wget https://github.com/simplesamlphp/simplesamlphp/releases/download/v$ssp_version/simplesamlphp-$ssp_version.tar.gz \
     && echo "$ssp_hash  simplesamlphp-$ssp_version.tar.gz" | sha256sum -c - \
 	&& cd /var \
