@@ -48,7 +48,7 @@ You should use this image as a base image for one's own IdP/SP deployment. The d
 Next, assuming you create a Dockerfile similar to this example:
 
 ```
-FROM unicon/shibboleth-idp
+FROM unicon/simplesamlphp
 
 MAINTAINER <your_contact_email>
 
