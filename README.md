@@ -52,7 +52,7 @@ FROM unicon/shibboleth-idp
 
 MAINTAINER <your_contact_email>
 
-COPY etc-httpd/ /etc/httdp/
+COPY etc-httpd/ /etc/httpd/
 COPY var-simplesamlphp/ /var/simplesamlphp/
 COPY var-www/ /var/www/
 ```
