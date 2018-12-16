@@ -1,7 +1,7 @@
 [![](https://badge.imagelayers.io/unicon/simplesamlphp:latest.svg)](https://imagelayers.io/?images=unicon/simplesamlphp:latest 'image layer analysis')
 
 ## Overview
-This Docker image contains a deployed SimpleSAMLphp IdP/SP based on PHP 5.5 running on Appache HTTP Server 2.4 on the latest CentOS 7 base. This image is a base image and should be used to set the content and configuration with local changes. It is suitable for use as a standalone IdP application or as a base to deploy another PHP application that will be protected by the service provider module.
+This Docker image contains a deployed SimpleSAMLphp IdP/SP based on PHP 7.2 running on Appache HTTP Server 2.4 on the latest CentOS 7 base. This image is a base image and should be used to set the content and configuration with local changes. It is suitable for use as a standalone IdP application or as a base to deploy another PHP application that will be protected by the service provider module.
 
 ```
 [rootdir]
@@ -128,7 +128,7 @@ $ docker build --tag="<org_id>/simplesamlphp" github.com/unicon/simplesamlphp-do
 
 ## LICENSE
 
-Copyright 2016 Unicon, Inc.
+Copyright 2018 Unicon, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
