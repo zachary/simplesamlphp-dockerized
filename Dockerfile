@@ -8,8 +8,8 @@ RUN yum -y install epel-release \
     && yum -y install httpd mod_ssl php php-mbstring php-mcrypt php-pdo php-pear php-xml wget \
     && yum -y clean all
 
-RUN ssp_version=1.16.1; \
-    ssp_hash=253187815693306eb5a0b5cc8a6c6a94ba70a7846871abb210c65d403839f468; \
+RUN ssp_version=1.16.2; \
+    ssp_hash=5be1b62b48cc322d65405b1897cfafdb5910c27177c220d248cee4c49f1cc195; \
     wget https://github.com/simplesamlphp/simplesamlphp/releases/download/v$ssp_version/simplesamlphp-$ssp_version.tar.gz \
     && echo "$ssp_hash  simplesamlphp-$ssp_version.tar.gz" | sha256sum -c - \
 	&& cd /var \
