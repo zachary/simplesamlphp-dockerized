@@ -8,10 +8,9 @@ RUN yum -y install epel-release \
     && yum-config-manager --enable remi-php72 \
     && yum -y install httpd mod_ssl php php-ldap php-mbstring php-memcache php-mcrypt php-pdo php-pear php-xml wget \
     && yum -y clean all
-    #&& ln -s /usr/bin/php72 /usr/bin/php
 
-RUN ssp_version=1.16.2; \
-    ssp_hash=5be1b62b48cc322d65405b1897cfafdb5910c27177c220d248cee4c49f1cc195; \
+RUN ssp_version=1.17.0-rc1; \
+    ssp_hash=da41b80482da9c7bbdb21c9fa3afd3839dc8a2dc458d7d78c3113960740be02c; \
     wget https://github.com/simplesamlphp/simplesamlphp/releases/download/v$ssp_version/simplesamlphp-$ssp_version.tar.gz \
     && echo "$ssp_hash  simplesamlphp-$ssp_version.tar.gz" | sha256sum -c - \
 	&& cd /var \
