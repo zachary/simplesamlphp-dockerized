@@ -1,23 +1,30 @@
-FROM centos:centos7
+FROM rockylinux/rockylinux:8.4 as download_ssp
+
+ARG SIMPLE_SAML_PHP_VERSION=1.19.3
+ARG SIMPLE_SAML_PHP_HASH=02b49c929e78032bef28cd4d4a7104b58a8dcaaed7f1f52f9c37313ee15ba293
+
+RUN dnf install -y wget \
+    && ssp_version=$SIMPLE_SAML_PHP_VERSION; \
+           ssp_hash=$SIMPLE_SAML_PHP_HASH; \
+           wget https://github.com/simplesamlphp/simplesamlphp/releases/download/v$ssp_version/simplesamlphp-$ssp_version.tar.gz \
+    && echo "$ssp_hash  simplesamlphp-$ssp_version.tar.gz" | sha256sum -c - \
+    && cd /var \
+    && tar xzf /simplesamlphp-$ssp_version.tar.gz \
+    && mv simplesamlphp-$ssp_version simplesamlphp
+
+FROM rockylinux/rockylinux:8.4
 
 LABEL maintainer="Unicon, Inc."
 
-RUN yum -y install epel-release \
-    && yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm \
-    && yum -y update \
-    && yum-config-manager --enable remi-php72 \
-    && yum -y install httpd mod_ssl wget \
-    && yum -y install php php-ldap php-mbstring php-memcache php-mcrypt php-pdo php-pear php-xml \
-    && yum -y clean all
+ARG PHP_VERSION=7.4.6-4.module+el8.4.0+415+e936cba3
+ARG HTTPD_VERSION=2.4.37-39.module+el8.4.0+655+f2bfd6ee.1
 
-RUN ssp_version=1.18.4; \
-    ssp_hash=7530dec7290ba5efaac08cb17042819a96dc530e217c3810cdde9be76d57b2ca; \
-    wget https://github.com/simplesamlphp/simplesamlphp/releases/download/v$ssp_version/simplesamlphp-$ssp_version.tar.gz \
-    && echo "$ssp_hash  simplesamlphp-$ssp_version.tar.gz" | sha256sum -c - \
-	&& cd /var \
-	&& tar xzf /simplesamlphp-$ssp_version.tar.gz \
-    && mv simplesamlphp-$ssp_version simplesamlphp \
-    && rm /simplesamlphp-$ssp_version.tar.gz
+COPY --from=download_ssp /var/simplesamlphp /var/simplesamlphp
+
+RUN dnf module enable -y php:7.4 \
+    && dnf install -y httpd-$HTTPD_VERSION php-$PHP_VERSION \
+    && dnf clean all \
+    && rm -rf /var/cache/yum
 
 RUN echo $'\nSetEnv SIMPLESAMLPHP_CONFIG_DIR /var/simplesamlphp/config\nAlias /simplesaml /var/simplesamlphp/www\n \
 <Directory /var/simplesamlphp/www>\n \
