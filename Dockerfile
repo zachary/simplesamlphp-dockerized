@@ -16,8 +16,8 @@ FROM rockylinux/rockylinux:8.4
 
 LABEL maintainer="Unicon, Inc."
 
-ARG PHP_VERSION=7.4.6-4.module+el8.4.0+415+e936cba3
-ARG HTTPD_VERSION=2.4.37-39.module+el8.4.0+655+f2bfd6ee.1
+ARG PHP_VERSION=7.4.19
+ARG HTTPD_VERSION=2.4.37
 
 COPY --from=download_ssp /var/simplesamlphp /var/simplesamlphp
 
