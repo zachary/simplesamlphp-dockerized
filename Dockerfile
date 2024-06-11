@@ -45,7 +45,7 @@ COPY simplesamlphp/config/authsources.php /var/simplesamlphp/config/
 COPY simplesamlphp/metadata/saml20-idp-remote.php /var/simplesamlphp/metadata/
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 RUN cd /var/simplesamlphp && composer install \
-    chmod -R 777 /var/cache
+    && chmod -R 777 /var/cache
 COPY httpd-foreground /usr/local/bin/
 
 EXPOSE 80 443
