@@ -1,7 +1,7 @@
-FROM rockylinux/rockylinux:9.3 as download_ssp
+FROM rockylinux/rockylinux:9.4 as download_ssp
 
-ARG SIMPLE_SAML_PHP_VERSION=2.2.2
-ARG SIMPLE_SAML_PHP_HASH=4aca4af58fcf450099f4729a5abe4a831d5dc8b5663d6147d3da069319f23107
+ARG SIMPLE_SAML_PHP_VERSION=2.3.0
+ARG SIMPLE_SAML_PHP_HASH=81df43faef167e51552552c6107cc9e7d8cad14e9713e55efdee39f213e61af1
 
 RUN dnf install -y wget \
     && ssp_version=$SIMPLE_SAML_PHP_VERSION; \
@@ -12,11 +12,11 @@ RUN dnf install -y wget \
     && tar xzf /simplesamlphp-$ssp_version-full.tar.gz \
     && mv simplesamlphp-$ssp_version simplesamlphp
 
-FROM rockylinux/rockylinux:9.3
+FROM rockylinux/rockylinux:9.4
 
 LABEL maintainer="Zachary"
 
-ARG PHP_VERSION=8.3.7
+ARG PHP_VERSION=8.3.10
 ARG HTTPD_VERSION=2.4.57
 
 COPY --from=download_ssp /var/simplesamlphp /var/simplesamlphp
